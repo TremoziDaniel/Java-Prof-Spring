@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Person list page</title>
+</head>
+<body>
+  <h2>Person list</h2>
+  <p><a href="/add">Add person</a></p>
+  <table border="1">
+    <tr>
+      <th>id</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th colspan="2">Action</th>
+    </tr>
+    <tr th:each="person: ${persons}">
+      <td th:utext="${person.id}">...</td>
+      <td th:utext="${person.firstName}">...</td>
+      <td th:utext="${person.lastName}">...</td>
+      <td><a th:href="@{/update/{id}(id=${person.id})}">o</a></td>
+      <td><a th:href="@{/delete/{id}(id=${person.id})}">x</a></td>
+    </tr>
+  </table>
+</body>
+</html>
