@@ -30,13 +30,12 @@ public class PersonService {
     }
 
     public void update(Integer id, Person updtPerson) {
-        Person person = personRepository.findById(id).get();
-        personRepository.delete(person);
-        person.setFirstname(updtPerson.getFirstname());
-        person.setLastname(updtPerson.getLastName());
+        Person oldPerson = personRepository.findById(id).get();
+        if (oldPerson != null) {
+            updtPerson.setId(id);
+            personRepository.save(updtPerson);
 // Недоработано, так как по сути просто удаляется старый и добавляется новый.
 // Лучше бы через Query консоль изменять.
-
-        personRepository.save(person);
+        }
     }
 }
