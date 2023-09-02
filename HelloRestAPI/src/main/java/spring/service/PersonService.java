@@ -1,5 +1,7 @@
 package spring.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.controller.vo.PersonVO;
@@ -12,6 +14,9 @@ import java.util.List;
 
 @Service
 public class    PersonService {
+
+    final static Logger logger = LoggerFactory.getLogger(PersonService.class);
+
     @Autowired
     PersonRepository persons;
 
@@ -26,14 +31,19 @@ public class    PersonService {
     public PersonVO add(PersonVO person) {
         Person newPerson = new Person(person.getFirstName(), person.getLastName());
         newPerson = persons.save(newPerson);
+        logger.info("Added new person = {}", newPerson);
+
         return PersonVO.valueOf(newPerson);
     }
 
-    public void add(Person person) {
+    public Person add(Person person) {
         Person newPerson = new Person(person.getFirstName(), person.getLastName());
-        Position newPosition = positions.findById(1).get();
-        newPerson.setPosition(newPosition);
-        persons.save(newPerson);
+//        Position newPosition = positions.findById(1).get();
+//        newPerson.setPosition(newPosition);
+        newPerson = persons.save(newPerson);
+        logger.info("Added new person = {}", newPerson);
+
+        return newPerson;
     }
 
     public Person findById(Integer id) {

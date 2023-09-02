@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Table(name = "person")
 public class Person {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="person_id")
     private int id;
     private String firstName;
@@ -61,8 +61,9 @@ public class Person {
     public String toString() {
         return "Person{" +
                 "id=" + id +
-                ", firstname='" + firstName + '\'' +
-                ", lastname='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", position=" + position +
                 '}';
     }
 }
